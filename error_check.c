@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 16:48:00 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/06/03 17:39:24 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/06/03 22:01:06 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int ft_is_sort(int *arr, int size)
 	i = 0;
 	while (i < size - 1)
 	{
-		if (arr[i] != arr[i] - 1)
+		if (arr[i] != arr[i + 1] - 1)
 			return (0);
 		i++;
 	}

@@ -1,33 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap.c                                             :+:      :+:    :+:   */
+/*   sort_five.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/03 18:48:58 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/06/03 19:58:54 by kaisuzuk         ###   ########.fr       */
+/*   Created: 2025/06/03 21:28:40 by kaisuzuk          #+#    #+#             */
+/*   Updated: 2025/06/03 22:16:41 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap(t_stack *stk, char *op)
+void	sort_five(t_stack *stk_a, t_stack *stk_b)
 {
-	t_node *top;
-	t_node *new_top;
-	t_node *dummy_node;
+	int max;
+	int counter;
 
-	dummy_node = stk->dummy_node;
-	top = dummy_node->next;
-	new_top = top->next;
-	if (top == dummy_node || new_top == dummy_node)
+	counter = stk_a->size - 3;
+	if (counter < 0)
 		return ;
-	dummy_node->next = new_top;
-	new_top->prev = dummy_node;
-	top->prev = new_top;
-	top->next = new_top->next;
-	new_top->next->prev = top;
-	new_top->next = top;
-	ft_printf("%s", op);
+	while (stk_a->size > 3)
+	{
+		max = max_node(stk_a);
+		if (max <= 3)
+		{
+			while (max--)
+				rotate(stk_a, ROTATE_A);
+		}
+		else
+		{
+			while (max--)
+				reverse_rotate(stk_a, REVERSE_ROTATE_A);
+		}
+		push(stk_b, stk_a, PUSH_B);
+	}
+	sort_three(stk_a);
+	while (counter--)
+		push(stk_a, stk_b, PUSH_A);
 }
