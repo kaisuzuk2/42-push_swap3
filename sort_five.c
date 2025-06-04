@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 21:28:40 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/06/03 22:16:41 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/06/03 22:59:32 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	sort_five(t_stack *stk_a, t_stack *stk_b)
 		}
 		else
 		{
+			max = stk_a->size - max;
 			while (max--)
 				reverse_rotate(stk_a, REVERSE_ROTATE_A);
 		}
@@ -37,5 +38,8 @@ void	sort_five(t_stack *stk_a, t_stack *stk_b)
 	}
 	sort_three(stk_a);
 	while (counter--)
+	{
 		push(stk_a, stk_b, PUSH_A);
+		rotate(stk_a, ROTATE_A);
+	}
 }

@@ -40,6 +40,7 @@ long				ft_atol(const char *nptr);
 // error check
 int					ft_is_digit(char **argv, int size);
 int					ft_is_sort(int *arr, int size);
+int					ft_is_duplicates(int *arr, int size);
 // make stack
 int					*compression(int *arr, int size);
 t_stack				*make_stack(void);

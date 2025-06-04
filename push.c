@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:49:27 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/06/03 22:19:19 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/06/03 22:59:11 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	push(t_stack *to_stack, t_stack *from_stack, char *op)
 		to_dummy_node->prev = node;
 		node->prev = to_dummy_node;
 		node->next = to_dummy_node;
+		ft_printf("%s", op);
 		return ;
 	}
 	node->prev = to_dummy_node;

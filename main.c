@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 16:55:24 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/06/03 22:02:54 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/06/04 19:04:47 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,15 @@ int main(int argc, char **argv)
 	arr = char_to_int(argv, argc);
 	if (!arr)
 		return (0);
+	if (ft_is_duplicates(arr, argc - 1))
+		return (printf(ERROR), 2);
 	if (ft_is_sort(arr, argc - 1))
 		return (0);
 	stk_a = stack_utils(arr, argc - 1);
 	stk_b = make_stack();
 	if (!stk_b)
 		return (0);
-
+	
 
 	if (stk_a->size <= 3)
 		sort_three(stk_a);
