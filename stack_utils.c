@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 16:57:53 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/06/03 18:26:46 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/06/04 21:21:44 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void free_stack(t_stack *stk_a)
 	free(stk_a);
 }
 
-static t_node *push_back(t_stack *stk_a, int rank)
+static t_node *push_add_back(t_stack *stk_a, int rank)
 {
 	t_node *tail;
 	t_node *new;
@@ -81,7 +81,7 @@ t_stack *stack_utils(int *arr, int size)
 	i = 0;
 	while (i < size)
 	{
-		if (!push_back(stk_a, rank_arr[i]))
+		if (!push_add_back(stk_a, rank_arr[i]))
 			return (free_stack(stk_a), NULL);
 		i++;
 	}

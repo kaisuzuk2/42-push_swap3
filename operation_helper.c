@@ -6,13 +6,13 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 21:32:13 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/06/03 22:15:34 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/06/04 21:23:04 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	max_node(t_stack *stk)
+int	get_max_node_index(t_stack *stk)
 {
 	t_node	*cur;
 	t_node	*max;
@@ -38,7 +38,25 @@ int	max_node(t_stack *stk)
 	return (i);
 }
 
-int	min_node(t_stack *stk)
+t_node *get_max_node(t_stack *stk)
+{
+	t_node *dummy_node;
+	t_node *max;
+	t_node *cur;
+
+	dummy_node = stk->dummy_node;
+	cur = dummy_node->next;
+	max = cur;
+	while (cur != dummy_node)
+	{
+		if (cur->rank > max->rank)
+			cur = max;
+		cur = cur->next;
+	}
+	return (max);
+}
+
+int	get_min_node_index(t_stack *stk)
 {
 	t_node *cur;
 	t_node *min;
@@ -62,4 +80,22 @@ int	min_node(t_stack *stk)
 		cur = cur->next;
 	}
 	return (i);
+}
+
+t_node *get_min_node(t_stack *stk)
+{
+	t_node *dummy_node;
+	t_node *min;
+	t_node *cur;
+
+	dummy_node = stk->dummy_node;
+	cur = dummy_node->next;
+	min = cur;	
+	while (cur != dummy_node)
+	{
+		if (cur->rank < min->rank)
+			min = cur;
+		cur = cur->next;
+	}
+	return (min);
 }

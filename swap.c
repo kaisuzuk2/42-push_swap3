@@ -6,13 +6,13 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:48:58 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/06/03 19:58:54 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/06/04 22:42:07 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap(t_stack *stk, char *op)
+void	swap_a(t_stack *stk)
 {
 	t_node *top;
 	t_node *new_top;
@@ -29,5 +29,5 @@ void	swap(t_stack *stk, char *op)
 	top->next = new_top->next;
 	new_top->next->prev = top;
 	new_top->next = top;
-	ft_printf("%s", op);
+	ft_printf(SWAP_A);
 }

@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 16:55:24 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/06/04 19:04:47 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/06/04 21:18:33 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int main(int argc, char **argv)
 		sort_three(stk_a);
 	else if (stk_a->size <= 5)
 		sort_five(stk_a, stk_b);
+	else
+		sort(stk_a, stk_b);
 	
 	t_node *dummy_node = stk_a->dummy_node;
 	t_node *cur = dummy_node->next;

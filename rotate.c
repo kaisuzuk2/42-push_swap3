@@ -6,13 +6,13 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:49:01 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/06/03 19:49:42 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/06/04 22:47:32 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	rotate(t_stack *stk, char *op)
+static void	rotate(t_stack *stk)
 {
 	t_node	*top;
 	t_node	*tail;
@@ -31,10 +31,9 @@ void	rotate(t_stack *stk, char *op)
 	top->prev = tail;
 	top->next = dummy_node;
 	dummy_node->prev = top;
-	ft_printf("%s", op);
 }
 
-void	reverse_rotate(t_stack *stk, char *op)
+static void	reverse_rotate(t_stack *stk)
 {
 	t_node *top;
 	t_node *tail;
@@ -55,5 +54,43 @@ void	reverse_rotate(t_stack *stk, char *op)
 
 	dummy_node->prev = new_tail;
 	new_tail->next = dummy_node;
-	ft_printf("%s", op);
 }
+
+void rotate_a(t_stack *stk_a)
+{
+	rotate(stk_a);
+	ft_printf(ROTATE_A);
+}
+
+void rotate_b(t_stack *stk_b)
+{
+	rotate(stk_b);
+	ft_printf(ROTATE_B);
+}
+
+void rotate_both(t_stack *stk_a, t_stack *stk_b)
+{
+	rotate(stk_a);
+	rotate(stk_b);
+	ft_printf(ROTATE_BOTH);
+}
+
+void reverse_rotate_a(t_stack *stk_a)
+{
+	reverse_rotate(stk_a);
+	ft_printf(REVERSE_ROTATE_A);
+}
+
+void reverse_rotate_b(t_stack *stk_b)
+{
+	reverse_rotate(stk_b);
+	ft_printf(REVERSE_ROTATE_B);
+}
+
+void reverse_rotate_both(t_stack *stk_a, t_stack *stk_b)
+{
+	reverse_rotate(stk_a);
+	reverse_rotate(stk_b);
+	ft_printf(REVERSE_ROTATE_BOTH);
+}
+

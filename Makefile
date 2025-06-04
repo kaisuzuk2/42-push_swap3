@@ -11,7 +11,10 @@ SRCS = main.c \
 		compression.c\
 		sort_three.c\
 		sort_five.c\
-		operation_helper.c
+		operation_helper.c\
+		cost_utils.c\
+		push_back.c\
+		sort.c
 
 OBJS = $(SRCS:%.c=%.o)
 

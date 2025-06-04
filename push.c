@@ -6,13 +6,13 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:49:27 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/06/03 22:59:11 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/06/04 22:53:14 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	push(t_stack *to_stack, t_stack *from_stack, char *op)
+static void	push(t_stack *to_stack, t_stack *from_stack)
 {
 	t_node *node;
 	t_node *top;
@@ -34,7 +34,7 @@ void	push(t_stack *to_stack, t_stack *from_stack, char *op)
 		to_dummy_node->prev = node;
 		node->prev = to_dummy_node;
 		node->next = to_dummy_node;
-		ft_printf("%s", op);
+		to_stack->size++;
 		return ;
 	}
 	node->prev = to_dummy_node;
@@ -42,5 +42,16 @@ void	push(t_stack *to_stack, t_stack *from_stack, char *op)
 	top->prev = node;
 	to_dummy_node->next = node;
 	to_stack->size++;
-	ft_printf("%s", op);
+}
+
+void push_b(t_stack *stk_b, t_stack *stk_a)
+{
+	push(stk_b, stk_a);
+	ft_printf(PUSH_B);
+}
+
+void push_a(t_stack *stk_a, t_stack *stk_b)
+{
+	push(stk_a, stk_b);
+	ft_printf(PUSH_A);
 }
