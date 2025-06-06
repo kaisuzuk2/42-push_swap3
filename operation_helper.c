@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 21:32:13 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/06/04 21:23:04 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/06/05 19:43:38 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_node *get_max_node(t_stack *stk)
 	while (cur != dummy_node)
 	{
 		if (cur->rank > max->rank)
-			cur = max;
+			max = cur;
 		cur = cur->next;
 	}
 	return (max);

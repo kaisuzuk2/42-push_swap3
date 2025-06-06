@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:07:04 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/06/04 23:13:02 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/06/06 20:25:17 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,38 +14,115 @@
 
 static void	stack_a_rotate(t_stack *stk_a)
 {
-	int	max;
-	int	mid;
+	int		max;
+	int		mid;
+	t_node	*tail;
 
+	tail = get_max_node(stk_a);
 	max = get_max_node_index(stk_a);
 	mid = stk_a->size / 2;
-	if (max > mid)
+	if (max <= mid)
 	{
-		while (max--)
-			reverse_rotate_a(stk_a);
+		while (stk_a->dummy_node->prev != tail)
+			rotate_a(stk_a);
 	}
 	else
 	{
-		while (max--)
-			rotate_a(stk_a);
+		while (stk_a->dummy_node->prev != tail)
+			reverse_rotate_a(stk_a);
 	}
 }
 
-static void	push_back_check(t_stack *stk_a, t_stack *stk_b)
-{
-	t_node	*stk_a_tail;
-	t_node	*stk_b_top;
+// static void	push_back_check(t_stack *stk_a, t_stack *stk_b)
+// {
+// 	t_node	*stk_a_tail;
+// 	t_node	*stk_b_top;
+// 	t_node	*stk_a_top;
 
+// 	stk_a_tail = stk_a->dummy_node->prev;
+// 	stk_b_top = stk_b->dummy_node->next;
+// 	stk_a_top = stk_a->dummy_node->next;
+// 	if (stk_b_top == stk_b->dummy_node)
+// 		return ;
+// 	// if (stk_b_top->rank + 1 == stk_a_tail->rank)
+// 	// 	reverse_rotate_a(stk_a);
+// 	stk_a_tail = stk_a->dummy_node->prev;
+// 	stk_a_top = stk_a->dummy_node->next;
+// 	while (stk_a_top->rank - 1 == stk_a_tail->rank)
+// 	{
+// 		reverse_rotate_a(stk_a);
+// 		stk_a_tail = stk_a->dummy_node->prev;
+// 		stk_a_top = stk_a->dummy_node->next;
+// 	}
+// 	if (stk_a_tail->rank > get_max_node(stk_b)->rank)
+// 		reverse_rotate_a(stk_a);
+// 	stk_b_top = stk_b->dummy_node->next;
+// 	stk_a_tail = stk_a->dummy_node->prev;
+// 	while (stk_b_top->rank + 1 == stk_a_tail->rank)
+// 	{
+// 		reverse_rotate_a(stk_a);
+// 		stk_b_top = stk_b->dummy_node->next;
+// 		stk_a_tail = stk_a->dummy_node->prev;
+// 	}
+// }
+
+static void push_back_check(t_stack *stk_a, t_stack *stk_b)
+{
+	t_node *stk_a_top;
+	t_node *stk_a_tail;
+	t_node *stk_b_top;
+
+	stk_a_top = stk_a->dummy_node->next;
 	stk_a_tail = stk_a->dummy_node->prev;
 	stk_b_top = stk_b->dummy_node->next;
+	
 	if (stk_b_top == stk_b->dummy_node)
 		return ;
-	if (stk_b_top->rank < stk_a_tail->rank)
-		reverse_rotate_a(stk_a);
+	while (1)
+	{
+		if (stk_a_tail->rank > get_max_node(stk_b)->rank)
+		{
+			reverse_rotate_a(stk_a);
+			stk_a_tail = stk_a->dummy_node->prev;
+		}
+
+		if (stk_a_top->rank - 1 == stk_a_tail->rank)
+		{
+			reverse_rotate_a(stk_a);
+			stk_a_top = stk_a->dummy_node->next;
+			stk_a_tail = stk_a->dummy_node->prev;
+		}
+		
+		if (stk_a_tail + 1 == stk_b_top)
+		{
+			reverse_rotate_a(stk_a);
+			stk_a_tail = stk_a->dummy_node->prev;
+			stk_b_top = stk_b->dummy_node->next;
+		}
+
+		if (stk_a_tail->rank < stk_b_top->rank)
+			break;		
+	}
+	
 }
 
 void	push_back(t_stack *stk_a, t_stack *stk_b)
 {
+	int node_size;
+	t_node *stk_a_tail;
+
+	node_size = stk_a->size + stk_b->size;
+	if (stk_a->dummy_node->prev->rank == node_size)
+		reverse_rotate_a(stk_a);
+	stk_a_tail = stk_a->dummy_node->prev;
+	if (stk_a->dummy_node->next->rank < stk_b->dummy_node->next->rank)
+	{
+		while (stk_a_tail->rank > stk_b->dummy_node->next->rank)
+		{
+			reverse_rotate_a(stk_a);
+			stk_a_tail = stk_a->dummy_node->prev;
+		}
+	}
 	while (stk_b->size)
 	{
 		push_back_check(stk_a, stk_b);

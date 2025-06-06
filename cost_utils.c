@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 19:09:07 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/06/04 23:38:55 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/06/05 22:41:06 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,12 @@ static void	calc_b_cost(t_cost *cst, t_stack *stk_b, int rank)
 	t_node	*cur;
 	int		i;
 
+	if (stk_b->size == 0)
+		return ;
 	cur = stk_b->dummy_node->next;
 	max = get_max_node(stk_b);
 	min = get_min_node(stk_b);
-	i = 0;
+	i = 1;
 	if (rank > max->rank)
 	{
 		cst->rb = get_max_node_index(stk_b);
@@ -50,10 +52,13 @@ static void	calc_b_cost(t_cost *cst, t_stack *stk_b, int rank)
 	}
 	else
 	{
-
-		// 多分この条件がおかしいのと、stack aの最後にすべてソートする必要があるね
-		while (cur->rank > rank && cur->next->rank < rank)
+		while (cur != stk_b->dummy_node)
+		{
+			if (cur->rank > rank && cur->next->rank < rank)
+				break;
 			i++;
+			cur = cur->next;
+		}
 		cst->rb = i;
 		cst->rrb = stk_b->size - i;
 	}
@@ -62,13 +67,27 @@ static void	calc_b_cost(t_cost *cst, t_stack *stk_b, int rank)
 static void	calc_optimization(t_cost *cst)
 {
 	if ((cst->ra + cst->rb) <= (cst->rra + cst->rrb))
-		(cst->rra = 0, cst->rrb = 0);
+	{
+		cst->rra = 0;
+		cst->rrb = 0;
+	}
 	else
-		(cst->ra = 0, cst->rb = 0);
+	{
+		cst->ra = 0;
+		cst->rb = 0;
+	}
 	while (cst->ra && cst->rb)
-		(cst->ra--, cst->rb--, cst->rr++);
+	{
+		cst->ra--;
+		cst->rb--;
+		cst->rr++;
+	}
 	while (cst->rra && cst->rrb)
-		(cst->rra--, cst->rrb--, cst->rrr++);
+	{
+		cst->rra--;
+		cst->rrb--;
+		cst->rrr++;
+	}
 }
 
 t_cost	*calc_cost(t_stack *stk_a, t_stack *stk_b)
@@ -104,5 +123,7 @@ t_cost	*calc_cost(t_stack *stk_a, t_stack *stk_b)
 		i++;
 		cur_node = cur_node->next;
 	}
+	// ft_printf("### best_cst\n");
+	// ft_printf("rr = %d / rrr = %d / ra = %d / rb = %d / rra = %d / rrb = %d\n", best_cst->rr, best_cst->rrr, best_cst->ra, best_cst->rb, best_cst->rra, best_cst->rrb);
 	return (best_cst);
 }

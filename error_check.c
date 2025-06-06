@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 16:48:00 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/06/04 19:05:14 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/06/06 00:03:10 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int ft_is_sort(int *arr, int size)
 	return (1);
 }
 
+// マイナスのときの処理
 int ft_is_digit(char **argv, int size)
 {
 	int i;
