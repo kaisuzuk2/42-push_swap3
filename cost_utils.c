@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 19:09:07 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/06/05 22:41:06 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/06/06 22:54:47 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,16 @@ static void	calc_b_cost(t_cost *cst, t_stack *stk_b, int rank)
 			i++;
 			cur = cur->next;
 		}
-		cst->rb = i;
-		cst->rrb = stk_b->size - i;
+		if(cur == stk_b->dummy_node)
+		{
+			cst->rb = 0;
+			cst->rrb = stk_b->size;
+		}
+		else
+		{
+			cst->rb = i;
+			cst->rrb = stk_b->size - i;
+		}
 	}
 }
 
@@ -106,6 +114,8 @@ t_cost	*calc_cost(t_stack *stk_a, t_stack *stk_b)
 	{
 		cur_cst = (t_cost *)malloc(sizeof(t_cost));
 		cost_init(cur_cst);
+		if (stk_b->size < 2)
+			return (cur_cst);
 		calc_b_cost(cur_cst, stk_b, cur_node->rank);
 		cur_cst->ra = i;
 		cur_cst->rra = stk_a->size - i;
