@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 19:09:07 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/06/07 16:55:21 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/06/07 21:02:44 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	calc_b_cost(t_cost *cst, t_stack *stk_b, int rank)
 	if (rank > max->rank)
 	{
 		cst->rb = get_max_node_index(stk_b);
-		cst->rrb = stk_b->size - get_max_node_index(stk_b);
+		cst->rrb = (stk_b->size - get_max_node_index(stk_b)) % stk_b->size;
 	}
 	else if (rank < min->rank)
 	{
@@ -54,15 +54,17 @@ static void	calc_b_cost(t_cost *cst, t_stack *stk_b, int rank)
 	{
 		while (cur != stk_b->dummy_node)
 		{
+			if (stk_b->dummy_node == cur->next)
+				break;
 			if (cur->rank > rank && cur->next->rank < rank)
 				break;
 			i++;
 			cur = cur->next;
 		}
-		if(cur == stk_b->dummy_node)
+		if(cur == stk_b->dummy_node || cur->next == stk_b->dummy_node)
 		{
 			cst->rb = 0;
-			cst->rrb = stk_b->size;
+			cst->rrb = 0;
 		}
 		else
 		{
@@ -75,16 +77,14 @@ static void	calc_b_cost(t_cost *cst, t_stack *stk_b, int rank)
 
 static void	calc_optimization(t_cost *cst)
 {
-	if ((cst->ra + cst->rb) <= (cst->rra + cst->rrb))
-	{
+	if (cst->ra <= cst->rra)
 		cst->rra = 0;
-		cst->rrb = 0;
-	}
-	else
-	{
+	else 
 		cst->ra = 0;
+	if (cst->rb <= cst->rrb)
+		cst->rrb = 0;
+	else 
 		cst->rb = 0;
-	}
 	while (cst->ra && cst->rb)
 	{
 		cst->ra--;
