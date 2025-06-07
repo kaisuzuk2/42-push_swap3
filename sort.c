@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 19:08:32 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/06/05 23:27:58 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/06/07 22:41:05 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ static void	do_sort(t_stack *stk_a, t_stack *stk_b)
 
 void	sort(t_stack *stk_a, t_stack *stk_b)
 {
-	while (stk_a->size > 3)
+	while (stk_a->size > 5)
 	{
 		do_sort(stk_a, stk_b);
 		push_b(stk_b, stk_a);
 	}
-	sort_three(stk_a);
+	sort_five(stk_a, stk_b);
 	push_back(stk_a, stk_b);
 }

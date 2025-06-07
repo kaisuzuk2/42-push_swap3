@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 19:09:07 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/06/07 21:02:44 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/06/07 23:26:28 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	calc_b_cost(t_cost *cst, t_stack *stk_b, int rank)
 	else if (rank < min->rank)
 	{
 		cst->rb = get_min_node_index(stk_b);
-		cst->rrb = stk_b->size - get_min_node_index(stk_b);
+		cst->rrb = (stk_b->size - get_min_node_index(stk_b)) % stk_b->size;
 	}
 	else
 	{
@@ -121,7 +121,7 @@ t_cost	*calc_cost(t_stack *stk_a, t_stack *stk_b)
 		cur_cst->ra = i;
 		cur_cst->rra =	(stk_a->size - i) % stk_a->size;
 		calc_optimization(cur_cst);
-		if (!best_cst || get_total_cost(cur_cst) < get_total_cost(best_cst))
+		if (!best_cst || get_total_cost(cur_cst) <= get_total_cost(best_cst))
 		{
 			if (best_cst)
 				free(best_cst);

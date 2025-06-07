@@ -6,11 +6,27 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 21:28:40 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/06/04 22:47:58 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/06/07 23:15:27 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+static int ft_is_list_sort(t_stack *stk_a)
+{
+	t_node *cur;
+	t_node *dummy_node;
+
+	dummy_node = stk_a->dummy_node;
+	cur = dummy_node->next;
+	while (cur->next != dummy_node)
+	{
+		if (!(cur->rank + 1 == cur->next->rank))
+			return (0);
+		cur = cur->next;
+	}
+	return (1);
+}
 
 void	sort_five(t_stack *stk_a, t_stack *stk_b)
 {
@@ -19,6 +35,8 @@ void	sort_five(t_stack *stk_a, t_stack *stk_b)
 
 	counter = stk_a->size - 3;
 	if (counter < 0)
+		return ;
+	if (ft_is_list_sort(stk_a))
 		return ;
 	while (stk_a->size > 3)
 	{

@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:07:04 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/06/07 15:46:05 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/06/07 22:37:05 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ void	push_back(t_stack *stk_a, t_stack *stk_b)
 	while (stk_b->size)
 	{
 		push_back_check(stk_a, stk_b);
-		if (stk_a->dummy_node->prev->rank == stk_a->size + stk_b->size && stk_a->dummy_node->prev->rank - 2 == stk_b->dummy_node->next->rank)
+		// if (stk_a->dummy_node->prev->rank == stk_a->size + stk_b->size && stk_a->dummy_node->prev->rank - 2 == stk_b->dummy_node->next->rank)
+		if (stk_a->dummy_node->prev->rank == stk_a->size + stk_b->size && stk_a->dummy_node->next->rank == 1)
 		{
 			reverse_rotate_a(stk_a);
 			push_back_check(stk_a, stk_b);
